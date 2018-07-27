@@ -46,7 +46,7 @@ final class JestTestEngine extends ArcanistUnitTestEngine {
         '--silent',
         '--colors',
         '--json',
-        '--reporters ' . __DIR__ . '/jest-dot-reporter.js',
+        '--reporters ' . __DIR__ . '/jest-summary-reporter.js',
         '--outputFile=' . $this->output_file
       )
     ));
