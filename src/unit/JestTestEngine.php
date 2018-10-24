@@ -17,6 +17,9 @@ final class JestTestEngine extends ArcanistUnitTestEngine {
     $paths = $this->getPaths();
     $options = array();
 
+    // TODO(duailibe, sherman) find a clean way to solve this
+    $paths[] = "packages/codesharing/symlinksChecker.test.js";
+
     if (!$this->getRunAllTests()) {
       $options[] = csprintf('--findRelatedTests %Ls', $paths);
     }
