@@ -19,6 +19,16 @@ final class JestTestEngine extends ArcanistUnitTestEngine {
 
     // TODO(duailibe, sherman) find a clean way to solve this
     $paths[] = "packages/codesharing/symlinksChecker.test.js";
+    foreach ($paths as $path) {
+      $absolute_web_path = str_replace(
+        '/rn/',
+        '/web/',
+        Filesystem::resolvePath($path, $this->project_root)
+      );
+      if (Filesystem::pathExists($absolute_web_path) && is_link($absolute_web_path)) {
+        $paths[] = $absolute_web_path;
+      }
+    }
 
     if (!$this->getRunAllTests()) {
       $options[] = csprintf('--findRelatedTests %Ls', $paths);
