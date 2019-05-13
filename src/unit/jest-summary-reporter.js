@@ -1,6 +1,6 @@
 'use strict';
 
-const getSummary = require('jest-cli/build/reporters/utils').getSummary;
+const getSummary = require('@jest/reporters/build/utils').getSummary;
 const CLEAR = '\r\x1B[K\r\x1B[1A';
 
 function getHeight(string) {
