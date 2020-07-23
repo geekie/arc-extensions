@@ -15,30 +15,18 @@ final class JestTestEngine extends ArcanistUnitTestEngine {
     $this->jest_binary = $this->getJestBinary();
 
     $paths = $this->getPaths();
-    $jest_paths = array();
     $options = array();
 
     if (!$this->getRunAllTests()) {
-      $options[] = '--findRelatedTests';
-      foreach ($paths as $path) {
-        $absolute_path = Filesystem::resolvePath($path, $this->project_root);
-
-        if (Filesystem::pathExists($absolute_path)) {
-          $jest_paths[] = $absolute_path;
-        }
-      }
-    }
-
-    if (empty($jest_paths) && !$this->getRunAllTests()) {
-      return array();
+      $options[] = csprintf('--findRelatedTests %Ls', $paths);
     }
 
     $this->output_file = new TempFile();
 
-    return $this->runTests($jest_paths, $options);
+    return $this->runTests($options);
   }
 
-  private function runTests($jest_paths, array $options) {
+  private function runTests(array $options) {
     $console = PhutilConsole::getConsole();
     $options = implode(' ', array_merge(
       $options,
@@ -51,9 +39,7 @@ final class JestTestEngine extends ArcanistUnitTestEngine {
       )
     ));
 
-    $future = new ExecFuture(
-      "{$this->jest_binary} {$options} %Ls", $jest_paths
-    );
+    $future = new ExecFuture("{$this->jest_binary} {$options}");
 
     do {
       $done = $future->resolve(0.2);
