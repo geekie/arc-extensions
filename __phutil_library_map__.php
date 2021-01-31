@@ -11,10 +11,12 @@ phutil_register_library_map(array(
   'class' => array(
     'ESLintLinter' => 'src/lint/ESLintLinter.php',
     'JestTestEngine' => 'src/unit/JestTestEngine.php',
+    'TypeScriptTypeChecker' => 'src/lint/TypeScriptTypeChecker.php',
   ),
   'function' => array(),
   'xmap' => array(
     'ESLintLinter' => 'ArcanistExternalLinter',
     'JestTestEngine' => 'ArcanistUnitTestEngine',
+    'TypeScriptTypeChecker' => 'ArcanistExternalLinter',
   ),
 ));
