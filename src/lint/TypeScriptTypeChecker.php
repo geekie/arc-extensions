@@ -76,7 +76,7 @@ final class TypeScriptTypeChecker extends ArcanistExternalLinter {
     }
 
     foreach($filteredLines as &$line) {
-      preg_match("/^(\w.+)\((.+),(.+)\): (\w+) (\w+): (.+\.)$/", $line, $matches);
+      preg_match("/^(\w.+)\((.+),(.+)\): (\w+) (\w+): (.+)$/", $line, $matches);
 
       if ($matches) {
         $dict = array(
